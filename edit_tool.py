@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-编辑文件工具 - Claude 可以修改文件
+File Editing Tool – LLM can modify files
 """
 
 import argparse
@@ -11,7 +11,12 @@ import sys
 from typing import Dict, Any, Callable, Tuple, Optional
 from anthropic import Anthropic
 from dataclasses import dataclass
+from dotenv import load_dotenv
 
+load_dotenv()
+BASE_URL = os.getenv("BASE_URL")
+API_KEY = os.getenv("API_KEY")
+MODEL_NAME = os.getenv("MODEL_NAME", "glm-4.7")
 
 @dataclass
 class ToolDefinition:
@@ -33,7 +38,7 @@ class Agent:
         if self.verbose:
             print("Starting chat session with tools enabled", file=sys.stderr)
 
-        print("Chat with Claude (use 'ctrl-c' to quit)")
+        print("Chat with LLM (use 'ctrl-c' to quit)")
 
         while True:
             try:
@@ -59,7 +64,7 @@ class Agent:
             })
 
             if self.verbose:
-                print(f"Sending message to Claude, conversation length: {len(conversation)}", file=sys.stderr)
+                print(f"Sending message to LLM, conversation length: {len(conversation)}", file=sys.stderr)
 
             message = self.run_inference(conversation)
             if message is None:
@@ -70,17 +75,17 @@ class Agent:
                 "content": message["content"]
             })
 
-            # Keep processing until Claude stops using tools
+            # Keep processing until LLM stops using tools
             while True:
                 tool_results = []
                 has_tool_use = False
 
                 if self.verbose:
-                    print(f"Processing {len(message['content'])} content blocks from Claude", file=sys.stderr)
+                    print(f"Processing {len(message['content'])} content blocks from LLM", file=sys.stderr)
 
                 for content in message["content"]:
                     if content["type"] == "text":
-                        print(f"\033[93mClaude\033[0m: {content['text']}")
+                        print(f"\033[93mLLM\033[0m: {content['text']}")
                     elif content["type"] == "tool_use":
                         has_tool_use = True
                         tool_use = content
@@ -144,16 +149,16 @@ class Agent:
                 if not has_tool_use:
                     break
 
-                # Send all tool results back and get Claude's response
+                # Send all tool results back and get LLM's response
                 if self.verbose:
-                    print(f"Sending {len(tool_results)} tool results back to Claude", file=sys.stderr)
+                    print(f"Sending {len(tool_results)} tool results back to LLM", file=sys.stderr)
 
                 conversation.append({
                     "role": "user",
                     "content": tool_results
                 })
 
-                # Get Claude's response after tool execution
+                # Get LLM's response after tool execution
                 message = self.run_inference(conversation)
                 if message is None:
                     return
@@ -179,11 +184,11 @@ class Agent:
             })
 
         if self.verbose:
-            print(f"Making API call to Claude with model: claude-3-7-sonnet-20250219 and {len(anthropic_tools)} tools", file=sys.stderr)
+            print(f"Making API call to LLM with model: {MODEL_NAME} and {len(anthropic_tools)} tools", file=sys.stderr)
 
         try:
             message = self.client.messages.create(
-                model="claude-3-7-sonnet-20250219",
+                model=MODEL_NAME,
                 max_tokens=1024,
                 messages=conversation,
                 tools=anthropic_tools
@@ -424,11 +429,14 @@ EditFileDefinition = ToolDefinition(
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Chat with Claude - File Reading, Listing, Bash, and Editing Tools")
+    parser = argparse.ArgumentParser(description="Chat with LLM - File Reading, Listing, Bash, and Editing Tools")
     parser.add_argument("--verbose", action="store_true", help="enable verbose logging")
     args = parser.parse_args()
 
-    client = Anthropic()
+    client = Anthropic(
+        base_url=BASE_URL,
+        api_key=API_KEY,
+    )
     if args.verbose:
         print("Anthropic client initialized", file=sys.stderr)
 

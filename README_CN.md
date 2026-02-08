@@ -1,6 +1,6 @@
 # Python 版本的编码助手
 
-这是 Go 版本编码助手的 Python 实现。逐步构建一个功能强大的 AI 编码助手。
+这是 [https://github.com/ghuntley/how-to-build-a-coding-agent](https://github.com/ghuntley/how-to-build-a-coding-agent) 编码助手的 Python 实现。逐步构建一个功能强大的 AI 编码助手。
 
 ## 功能特性
 
@@ -26,11 +26,14 @@
 pip install -r requirements.txt
 ```
 
-### 设置 API Key 和 BASE URL
+### 设置 API Key 和 BASE URL, MODEL_NAME
+
+MODEL_NAME默认使用 glm-4.7
 在.env文件中设置
 ```
 API_KEY=your-api-key-here
 BASE_URL=base-url-here
+MODEL_NAME=glm-4.7
 ```
 
 或者在代码中直接设置（不推荐用于生产环境）：
@@ -179,8 +182,4 @@ cargo install ripgrep
 
 - 确保已安装 ripgrep：`which rg`
 - 如果未安装，请按照上面的说明安装
-
-## 许可证
-
-与原项目相同的许可证。
 

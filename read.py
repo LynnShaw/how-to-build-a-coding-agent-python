@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-读取文件工具 - LLM 可以读取文件内容
+File Reading Tool – The LLM can read file contents
 """
 
 import argparse
@@ -183,11 +183,11 @@ class Agent:
             })
 
         if self.verbose:
-            print(f"Making API call to LLM with model: LLM-3-7-sonnet-20250219 and {len(anthropic_tools)} tools", file=sys.stderr)
+            print(f"Making API call to LLM with model: {MODEL_NAME} and {len(anthropic_tools)} tools", file=sys.stderr)
 
         try:
             message = self.client.messages.create(
-                model="LLM-3-7-sonnet-20250219",
+                model=MODEL_NAME,
                 max_tokens=1024,
                 messages=conversation,
                 tools=anthropic_tools

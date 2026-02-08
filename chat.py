@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-基础聊天功能 - 与 LLM 进行简单对话
+Basic Chat Function – Simple Conversation with LLM
 """
 
 import argparse
