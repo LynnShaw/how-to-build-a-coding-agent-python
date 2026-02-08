@@ -1,5 +1,5 @@
 # Python-based Coding Assistant
-[中文](readme_cn.md)
+[中文](README_CN.md)
 
 This is a Python implementation of the coding assistant from [https://github.com/ghuntley/how-to-build-a-coding-agent](https://github.com/ghuntley/how-to-build-a-coding-agent). We build a powerful AI coding assistant step by step.
 
@@ -120,47 +120,6 @@ Each file contains:
 - Tool functions: Implement specific tool functionalities
 - `main` function: Program entry point
 
-## Tool Descriptions
-
-### read_file
-
-Reads the content of a file.
-
-**Input**:
-- `path` (string): File path
-
-### list_files
-
-Lists files and folders in a directory.
-
-**Input**:
-- `path` (string, optional): Directory path, defaults to the current directory
-
-### bash
-
-Executes bash commands.
-
-**Input**:
-- `command` (string): Command to execute
-
-### edit_file
-
-Edits a file by replacing `old_str` with `new_str`.
-
-**Input**:
-- `path` (string): File path
-- `old_str` (string): Text to be replaced
-- `new_str` (string): Replacement text
-
-### code_search
-
-Searches code patterns using ripgrep.
-
-**Input**:
-- `pattern` (string): Search pattern or regular expression
-- `path` (string, optional): Search path
-- `file_type` (string, optional): File type filter (e.g., 'py', 'js', 'go')
-- `case_sensitive` (boolean, optional): Case sensitivity, defaults to false
 
 ## Troubleshooting
 
