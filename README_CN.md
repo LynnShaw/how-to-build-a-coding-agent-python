@@ -119,47 +119,6 @@ cargo install ripgrep
 - 工具函数：实现具体的工具功能
 - `main` 函数：程序入口点
 
-## 工具说明
-
-### read_file
-
-读取文件内容。
-
-**输入**:
-- `path` (string): 文件路径
-
-### list_files
-
-列出目录中的文件和文件夹。
-
-**输入**:
-- `path` (string, 可选): 目录路径，默认为当前目录
-
-### bash
-
-执行 bash 命令。
-
-**输入**:
-- `command` (string): 要执行的命令
-
-### edit_file
-
-编辑文件，替换 `old_str` 为 `new_str`。
-
-**输入**:
-- `path` (string): 文件路径
-- `old_str` (string): 要替换的文本
-- `new_str` (string): 替换后的文本
-
-### code_search
-
-使用 ripgrep 搜索代码模式。
-
-**输入**:
-- `pattern` (string): 搜索模式或正则表达式
-- `path` (string, 可选): 搜索路径
-- `file_type` (string, 可选): 文件类型过滤（如 'py', 'js', 'go'）
-- `case_sensitive` (boolean, 可选): 是否区分大小写，默认为 false
 
 ## 故障排除
 
@@ -183,3 +142,11 @@ cargo install ripgrep
 - 确保已安装 ripgrep：`which rg`
 - 如果未安装，请按照上面的说明安装
 
+
+## TODO
+
+- 实现 ReAct 框架：添加思考-行动-观察循环机制
+- 构建安全沙盒：隔离 Bash 执行环境，添加权限控制
+- 增强代码能力：添加代码生成、编辑、格式化工具
+- 实现状态管理：添加会话持久化和上下文记忆
+- 集成测试环境：支持代码测试和验证

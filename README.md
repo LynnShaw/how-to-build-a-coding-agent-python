@@ -1,5 +1,5 @@
 # Python-based Coding Assistant
-[中文版说明](readme_cn.md)
+[中文](readme_cn.md)
 
 This is a Python implementation of the coding assistant from [https://github.com/ghuntley/how-to-build-a-coding-agent](https://github.com/ghuntley/how-to-build-a-coding-agent). We build a powerful AI coding assistant step by step.
 
